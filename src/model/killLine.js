@@ -13,6 +13,15 @@ class Hero {
     lzsx.forEach(t=>{
       let skill = this.skill[t]
       damageSum += skill.damage[skill.level - 1] + this.spellPower * skill.coefficient
+      if (skill.damage2) {
+        damageSum += skill.damage2[skill.level - 1] + this.spellPower * skill.coefficient2
+        if (skill.damage3) {
+          damageSum += skill.damage3[skill.level - 1] + this.spellPower * skill.coefficient3
+          if (skill.damage4) {
+            damageSum += skill.damage4[skill.level - 1] + this.spellPower * skill.coefficient4
+          }
+        }
+      }
     })
     return damageSum
   }

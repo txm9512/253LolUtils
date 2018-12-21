@@ -10,7 +10,7 @@ class Hero {
   doSkill() {
     this.heroExceptionalCase()
     let damageSum = 0
-    lzsx.forEach(t=>{
+    combo.forEach(t=>{
       let skill = this.skill[t]
       for (let i = 0; i < skill.multiple; i++) {
         damageSum += skill.damage[i][skill.level - 1] + this.spellPower * skill.coefficient[i][skill.level - 1]
@@ -78,8 +78,8 @@ const LeBlanc = new Hero({
     },
   },
   heroExceptionalCase:function() {
-    let i = lzsx.findIndex(t => t === 'r')
-    switch (lzsx[i - 1]) {
+    let i = combo.findIndex(t => t === 'r')
+    switch (combo[i - 1]) {
       case 'q':
         this.skill.r.castQR()
         break;
@@ -100,6 +100,6 @@ LeBlanc.skill.w.level++
 LeBlanc.skill.w.level++
 LeBlanc.skill.r.level++
 LeBlanc.spellPower = 200
-let lzsx = ['q', 'w', 'e', 'r']
+let combo = ['q', 'w', 'e', 'r']
 let damageSum = LeBlanc.doSkill()
 console.log(damageSum)

@@ -12,15 +12,8 @@ class Hero {
     let damageSum = 0
     lzsx.forEach(t=>{
       let skill = this.skill[t]
-      damageSum += skill.damage[skill.level - 1] + this.spellPower * skill.coefficient
-      if (skill.damage2) {
-        damageSum += skill.damage2[skill.level - 1] + this.spellPower * skill.coefficient2
-        if (skill.damage3) {
-          damageSum += skill.damage3[skill.level - 1] + this.spellPower * skill.coefficient3
-          if (skill.damage4) {
-            damageSum += skill.damage4[skill.level - 1] + this.spellPower * skill.coefficient4
-          }
-        }
+      for (let i = 0; i < skill.multiple; i++) {
+        damageSum += skill.damage[i][skill.level - 1] + this.spellPower * skill.coefficient[i][skill.level - 1]
       }
     })
     return damageSum
@@ -35,53 +28,52 @@ const LeBlanc = new Hero({
     q: {
       name: '恶意魔印',
       level: 0,
-      damage: [55, 80, 105, 130, 155],
-      coefficient: 0.4,
-      damage2: [55, 80, 105, 130, 155],
-      coefficient2: 0.4,
-      cooldown: 6,
+      multiple: 2,
+      damage: [[55, 80, 105, 130, 155], [55, 80, 105, 130, 155]],
+      coefficient: [[0.4, 0.4, 0.4, 0.4, 0.4], [0.4, 0.4, 0.4, 0.4, 0.4]],
+      cooldown: [6, 6, 6],
       mana: [50, 60, 70, 80, 90]
     },
     w: {
       name: '魔影迷踪',
       level: 0,
-      damage: [75, 115, 155, 195, 235],
-      coefficient: 0.6,
+      multiple: 1,
+      damage: [[75, 115, 155, 195, 235]],
+      coefficient: [[0.6, 0.6, 0.6, 0.6, 0.6]],
       cooldown: [18, 16, 14, 12, 10],
       mana: [70, 80, 90, 100, 110]
     },
     e: {
       name: '幻影锁链',
       level: 0,
-      damage: [40, 60, 80, 100, 120],
-      coefficient: 0.5,
-      damage2: [40, 60, 80, 100, 120],
-      coefficient2: 0.5,
+      multiple: 2,
+      damage: [[40, 60, 80, 100, 120], [40, 60, 80, 100, 120]],
+      coefficient: [[0.5, 0.5, 0.5, 0.5, 0.5], [0.5, 0.5, 0.5, 0.5, 0.5]],
       cooldown: [14, 13.3, 12.5, 11.8, 11],
       mana: 70,
     },
     r: {
       name: '故技重施',
       level: 0,
+      multiple: 0,
       damage: [],
       coefficient: 0,
       cooldown: [54, 42, 30],
       mana: 0,
       castQR: function() {
-        this.damage = [70, 140, 210]
-        this.coefficient = 0.4
-        this.damage2 = [70, 140, 210]
-        this.coefficient2 = 0.4
+        this.multiple = 2
+        this.damage = [[70, 140, 210], [70, 140, 210]]
+        this.coefficient = [[0.4, 0.4, 0.4, 0.4, 0.4], [0.4, 0.4, 0.4, 0.4, 0.4]]
       },
       castWR: function() {
-        this.damage = [150, 300, 450]
-        this.coefficient = 0.75
+        this.multiple = 1
+        this.damage = [[150, 300, 450]]
+        this.coefficient = [[0.75, 0.75, 0.75, 0.75, 0.75]]
       },
       castER: function() {
-        this.damage = [70, 140, 210]
-        this.coefficient = 0.4
-        this.damage2 = [70, 140, 210]
-        this.coefficient2 = 0.4
+        this.multiple = 2
+        this.damage = [[70, 140, 210], [70, 140, 210]]
+        this.coefficient = [[0.4, 0.4, 0.4, 0.4, 0.4], [0.4, 0.4, 0.4, 0.4, 0.4]]
       }
     },
   },
